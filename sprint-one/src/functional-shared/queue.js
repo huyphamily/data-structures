@@ -16,13 +16,13 @@ var queueMethods = {
     this._length++;
   },
   dequeue: function (){
-    if( this._length > 0 ) {
+    if( this._length ) {
       this._length--;
+      var temp = this._storage[this._start];
+      delete this._storage[this._start];
+      this._start++;
+      return temp;
     }
-    var temp = this._storage[this._start];
-    delete this._storage[this._start];
-    this._start++;
-    return temp;
   },
   size: function (){
     return this._length;
