@@ -8,22 +8,20 @@ var Stack = function() {
 
 
 
-Stack.prototype = {
-  
-  push : function(value){
-    this.storage[this.storage.length] = value;
-    this.storage.length++;
-  },
-  pop : function(){
-    if (this.storage.length > 0) {
-      this.storage.length--;
-    }
-    var temp = this.storage[this.storage.length];
-    delete this.storage[this.storage.length];
-    return temp;
-  },
-  size : function(){
-    return this.storage.length;
+Stack.prototype.push = function(value){
+  this.storage[this.storage.length] = value;
+  this.storage.length++;
+};
+
+Stack.prototype.pop = function(){
+  if (this.storage.length > 0) {
+    this.storage.length--;
   }
-  
+  var temp = this.storage[this.storage.length];
+  delete this.storage[this.storage.length];
+  return temp;
+};
+
+Stack.prototype.size = function(){
+  return this.storage.length;
 };
