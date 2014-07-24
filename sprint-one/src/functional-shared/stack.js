@@ -3,8 +3,8 @@ var makeStack = function() {
   // but try not not reference your old code in writing the new style.
   
   var instance = {};
-  instance.storage = {};
-  instance.length = 0;
+  instance._storage = {};
+  instance._length = 0;
 
   _.extend(instance, stackMethods);
 
@@ -14,19 +14,19 @@ var makeStack = function() {
 
 var stackMethods = {
   push: function (value) {
-    this.storage[this.length] = value;
-    this.length++;
+    this._storage[this._length] = value;
+    this._length++;
   },
   pop: function () {
-    if (this.length > 0) {
-      this.length--;
+    if (this._length > 0) {
+      this._length--;
     }
-    var temp = this.storage[this.length];
-    delete this.storage[this.length];
+    var temp = this._storage[this._length];
+    delete this._storage[this._length];
     return temp;
   },
   size: function () {
-    return this.length;
+    return this._length;
   }
 };
 
