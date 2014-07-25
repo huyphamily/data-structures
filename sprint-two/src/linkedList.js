@@ -1,68 +1,43 @@
 var makeLinkedList = function(){
   var list = {};
-  list.counter = 0;
   list.head = null;
   list.tail = null;
 
 
-  list.addToTail = function(value){
+  list.addToTail = function(value){ // constant time
     var node = makeNode(value);
-    var index = this.counter;
-    // if the head is null, set head to somehow mean this node
     if (this.head === null) {
-      this.head = {
-        index: index,
-        value: value
-      };
+      this.head = node;
+      this.tail = node;
+    } else {
+      this.tail.next = node;
+      this.tail = node;
     }
-    this[index] = node;
-    // set the previous tail to point to node, and add node to list.tail
-    if (this.tail !== null) {
-      this[this.tail.end].next = index;
-    }
-
-    this.tail = {
-      end: index,
-      value: value
-    };
-
-    this.counter++;
   };
 
-  list.removeHead = function(){
-    //this[this.head.index] = old head obj
-    //this[this.head.index].next = index of new head obj
-    //this [ this[this.head.index].next ] = new head obj
-    if (this.head === null) {
-      return null;
+  list.removeHead = function(){ // constant time
+    if (this.head !== null) {
+      var result = this.head.value;
+      this.head = this.head.next;
+      return result;
     }
-    var oldHead = this[this.head.index];
-    var newHeadIndex = this[oldHead].next;
-    var newHead = this[ newHeadIndex ];
-
-
-    var result = this.head.value;
-
-    delete oldHead;
-    // deleting the old head
-    this.head.index = newHeadIndex;
-    this.head.value = newHead.value;
-    return result;
-    //remove the node at the head reference
-    // make the next value of previous head the NEW head.
   };
 
-  list.contains = function(target){
-    // start at the head, and check value to see if it matches target,
-    // if the value does not equal target, check the .next node
-    // continue until you find your target and return true
-    // if value is never found, return false
+  list.contains = function(target){ // linear time
+    var current = this.head;
+    while (current !== null) {
+      if (current.value === target) {
+        return true;
+      }
+      current = current.next;
+    }
+    return false;
   };
 
   return list;
 };
 
-var makeNode = function(value){
+var makeNode = function(value){ // constant time
   var node = {};
 
   node.value = value;
@@ -74,4 +49,15 @@ var makeNode = function(value){
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
+
+// head------->node1 
+//              value->data1
+//              next----------------->node2 
+//                                     value-> data2
+//                                     next------------->node3 <------------tail.value
+//                                                        value->data1
+//                                                        next ->null 
+
+
 
