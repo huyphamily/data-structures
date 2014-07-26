@@ -20,6 +20,7 @@ treeMethods.addChild = function(value){
 treeMethods.contains = function(target){
   //return true if it contains the value
   //else it return false
+
   var result = false;
 
   if (this.value === target) {
@@ -33,6 +34,7 @@ treeMethods.contains = function(target){
       // if any of the children have the target value, we will return true
       if ( child.contains(target) ) {
         result = true;
+        return null;
       }
     });
   }
