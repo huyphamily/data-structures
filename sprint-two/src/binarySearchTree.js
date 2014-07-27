@@ -7,10 +7,6 @@ var makeBinarySearchTree = function(value){
 };
 
 
-
-/*
- * Complexity: What is the time complexity of the above functions?
- */
 var binaryTreeMethods = {};
 
 //need an insert methods 
@@ -81,6 +77,28 @@ binaryTreeMethods.contains = function (value) {
 };
 
 //needs a depthFirstLog() methods 
-binaryTreeMethods.depthFirstLog = function () {
-  
+binaryTreeMethods.depthFirstLog = function (iterator) {
+  // run the iterator on the current node value, 
+  iterator(this.value);
+
+  // if the right node is not null
+  if(this.right !== null) {
+    // call depthFirstLog on the right node
+    this.right.depthFirstLog(iterator);
+  }
+
+  // if the left node is not null
+  if(this.left !== null) {
+    // call depthFirstLog on the left node
+    this.left.depthFirstLog(iterator);
+  }
 };
+
+/*
+ * Complexity: What is the time complexity of the above functions?
+ *
+ * .insert: log
+ * .contains: log
+ * .depthFirstLog: linear
+ *
+ */
